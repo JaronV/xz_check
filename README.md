@@ -16,7 +16,7 @@ This Bash script checks the version of the `xz` compression utility installed on
     ```
 3. Make the script executable:
     ```bash
-    chmod +x xz_version_checker.sh
+    chmod +x vulnerable_xz_check.sh
     ```
 4. Run the script:
     ```bash
