@@ -1,0 +1,29 @@
+---
+- name: Check xz version and possible vulnerable versions
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Check if xz is installed
+      command: "command -v xz"
+      register: xz_installed
+      ignore_errors: true
+
+    - name: Display message if xz is not installed
+      debug:
+        msg: "xz is not installed on this system."
+      when: xz_installed.rc != 0
+
+    - name: Get xz version if installed
+      command: "xz --version | head -n 1 | cut -d ' ' -f 4"
+      register: xz_version
+      when: xz_installed.rc == 0
+
+    - name: Check for vulnerabilities
+      debug:
+        msg: "xz version {{ xz_version.stdout }} is vulnerable"
+      when: xz_version.stdout is search("5.6.0") or xz_version.stdout is search("5.6.1")
+
+    - name: Display message if xz is not vulnerable
+      debug:
+        msg: "xz version {{ xz_version.stdout }} is not vulnerable"
+      when: xz_version.stdout is not search("5.6.0") and xz_version.stdout is
