@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if xz is installed
+if ! command -v xz &> /dev/null; then
+    echo "xz is not installed on this system."
+    exit 1
+fi
+
 # Run xz --version and capture the output
 version=$(xz --version 2>&1 | head -n 1 | cut -d ' ' -f 4)
 
