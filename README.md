@@ -20,7 +20,7 @@ This Bash script checks the version of the `xz` compression utility installed on
     ```
 4. Run the script:
     ```bash
-    ./xz_version_checker.sh
+    ./vulnerable_xz_check.sh
     ```
 
 ## Script Details
